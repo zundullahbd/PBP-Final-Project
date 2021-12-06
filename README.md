@@ -1,4 +1,4 @@
-# tugas-akhir-pbp-f03
+# Tugas Akhir PBP
 
 ## Anggota Kelompok F03:
 - Anne Aisyah Azka (NPM: 2006484993)
@@ -10,7 +10,7 @@
 - Zundullah B. Djibat (NPM: 2006464505)
 
 ## Link Download Apk :
---coming soon--
+https://drive.google.com/drive/u/0/folders/1aI0UXic0k3U5bEdiYpm0pmbqd4yTkjxE
 
 ## Cerita singkat aplikasi :
 **Pandemic Based Productivity (PBP)**<br>
