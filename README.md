@@ -10,7 +10,7 @@
 - Zundullah B. Djibat (NPM: 2006464505)
 
 ## Link Download Apk :
-https://drive.google.com/drive/u/0/folders/1aI0UXic0k3U5bEdiYpm0pmbqd4yTkjxE
+https://drive.google.com/file/d/1KYQf-Mc8bsSsY7g7RB26QpCD0jSsK-P7/view?usp=sharing
 
 ## Cerita singkat aplikasi :
 **Pandemic Based Productivity (PBP)**<br>
