@@ -2,20 +2,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
+import 'package:tugas_akhir_f03/main.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: NavApp(),
-    debugShowCheckedModeBanner: false,
-  ));
-}
+// void main() {
+//   runApp(MaterialApp(
+//     home: NavApp(),
+//     debugShowCheckedModeBanner: false,
+//   ));
+// }
 
 double collapsableHeight = 0.0;
 Color selected = const Color(0xffffffff);
 Color notSelected = const Color(0xafffffff);
 
 class NavApp extends StatefulWidget {
-  NavApp({Key? key}) : super(key: key);
+  final String current;
+  final BuildContext currContext;
+  NavApp({
+    Key? key,
+    this.current = "",
+    required this.currContext,
+  }) : super(key: key);
   @override
   _MyNavState createState() => _MyNavState();
 }
@@ -38,27 +45,27 @@ class _MyNavState extends State<NavApp> {
       NavBarItem(
         text: 'SusunJadwal',
         isLogin: false,
-        onTap: () {},
+        onTap: (String text) {},
       ),
       NavBarItem(
         text: 'Search',
         isLogin: false,
-        onTap: () {},
+        onTap: (String text) {},
       ),
       NavBarItem(
         text: 'To-Do List',
         isLogin: false,
-        onTap: () {},
+        onTap: (String text) {},
       ),
       NavBarItem(
         text: 'Covid-19 Data',
         isLogin: false,
-        onTap: () {
+        onTap: (String text) {
           Widget next = const CovidData();
           setState(() {
             collapsableHeight = 0.0;
           });
-          if (context != next) {
+          if (widget.current != text) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => next),
@@ -69,12 +76,12 @@ class _MyNavState extends State<NavApp> {
       NavBarItem(
         text: 'Scheduler',
         isLogin: false,
-        onTap: () {},
+        onTap: (String text) {},
       ),
       NavBarItem(
         text: 'Login',
         isLogin: true,
-        onTap: () {},
+        onTap: (String text) {},
       ),
     ];
     totalNavItems = navBarItems.length;
@@ -87,13 +94,30 @@ class _MyNavState extends State<NavApp> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'P . B . P',
-                style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0.9),
+              TextButton(
+                onPressed: () {
+                  Widget next = const MyApp();
+                  setState(() {
+                    collapsableHeight = 0.0;
+                  });
+                  if (widget.current != "") {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => next),
+                    // );
+                    //Navigator.of(context, rootNavigator: true).pop(context);
+                    Navigator.popUntil(
+                        widget.currContext, ModalRoute.withName('/'));
+                  }
+                },
+                child: Text(
+                  'P . B . P',
+                  style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.9),
+                ),
               ),
               LayoutBuilder(builder: (context, constraints) {
                 return NavBarButton(
@@ -163,7 +187,7 @@ class _NavBarItemState extends State<NavBarItem> {
           splashColor: Colors.white60,
           onTap: () {
             setState(() {
-              widget.onTap();
+              widget.onTap(widget.text);
             });
           },
           child: Container(

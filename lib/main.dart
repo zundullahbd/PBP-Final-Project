@@ -85,7 +85,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          NavApp(),
+          NavApp(
+            currContext: context,
+          ),
           Text(
             'Pandemic Based Productivity',
             style: GoogleFonts.poppins(

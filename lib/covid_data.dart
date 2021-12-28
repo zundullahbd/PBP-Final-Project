@@ -14,32 +14,33 @@ class CovidData extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Covid-19 Data',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.teal,
-        ).copyWith(
-          secondary: Colors.green,
-        ),
-        canvasColor: const Color(0xFFF0F8FF),
-        textTheme: const TextTheme(
-          bodyText2: TextStyle(color: Color(0xFF000000), fontSize: 30),
-          headline4: TextStyle(color: Color(0xFF800000), fontSize: 17),
-          headline6: TextStyle(color: Color(0xFF000000), fontSize: 15),
-        ),
-      ),
-      home: const MyHomePage(title: 'Covid-19 Data'),
-    );
+    // return MaterialApp(
+    //   title: 'Covid-19 Data',
+    //   theme: ThemeData(
+    //     // This is the theme of your application.
+    //     //
+    //     // Try running your application with "flutter run". You'll see the
+    //     // application has a blue toolbar. Then, without quitting the app, try
+    //     // changing the primarySwatch below to Colors.green and then invoke
+    //     // "hot reload" (press "r" in the console where you ran "flutter run",
+    //     // or simply save your changes to "hot reload" in a Flutter IDE).
+    //     // Notice that the counter didn't reset back to zero; the application
+    //     // is not restarted.
+    //     colorScheme: ColorScheme.fromSwatch(
+    //       primarySwatch: Colors.teal,
+    //     ).copyWith(
+    //       secondary: Colors.green,
+    //     ),
+    //     canvasColor: const Color(0xFFF0F8FF),
+    //     textTheme: const TextTheme(
+    //       bodyText2: TextStyle(color: Color(0xFF000000), fontSize: 30),
+    //       headline4: TextStyle(color: Color(0xFF800000), fontSize: 17),
+    //       headline6: TextStyle(color: Color(0xFF000000), fontSize: 15),
+    //     ),
+    //   ),
+    //   home: const MyHomePage(title: 'Covid-19 Data'),
+    // );
+    return const MyHomePage(title: 'Covid-19 Data');
   }
 }
 
@@ -95,7 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
         // horizontal).
         //mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          NavApp(),
+          NavApp(
+            current: "Covid-19 Data",
+            currContext: context,
+          ),
           const Padding(
             padding: EdgeInsets.only(top: 20.0),
             child: Text(
