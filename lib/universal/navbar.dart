@@ -140,7 +140,7 @@ class _MyNavState extends State<NavApp> {
         AnimatedContainer(
           duration: const Duration(milliseconds: 375),
           curve: Curves.ease,
-          height: (width < 800.0) ? collapsableHeight : 0.0,
+          height: (width < double.infinity) ? collapsableHeight : 0.0,
           //width: double.infinity,
           color: const Color(0xFF5F9EA0),
           child: SingleChildScrollView(
@@ -196,6 +196,7 @@ class _NavBarItemState extends State<NavBarItem> {
             margin: const EdgeInsets.symmetric(horizontal: 24.0),
             child: widget.isLogin == false
                 ? Text(
+                    // not login
                     widget.text,
                     style: GoogleFonts.poppins(
                         color: Colors.black54,
@@ -203,6 +204,7 @@ class _NavBarItemState extends State<NavBarItem> {
                         letterSpacing: 0.9),
                   )
                 : Text(
+                    // login
                     widget.text,
                     style: GoogleFonts.poppins(
                       color: Colors.white,
