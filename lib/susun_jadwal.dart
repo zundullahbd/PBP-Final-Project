@@ -36,34 +36,35 @@ class SusunJadwal extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.light,
-        primarySwatch: Colors.teal,
-        scaffoldBackgroundColor: Color.fromRGBO(235, 240, 242, 100),
-
-        // Define the default font family.
-        fontFamily: 'Georgia',
-
-        // Define the default `TextTheme`. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
-        textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold,
-              color: Colors.teal),
-          headline2: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,
-              color: Color.fromRGBO(16, 130, 88, 100)),
-          bodyText2: TextStyle(fontSize: 15.0),
-        ),
-      ),
-      home: new MyCard(),
-    );
+    return const MyCard(title: "Susun Jadwal");
+      // MaterialApp(
+      // title: 'Flutter Demo',
+      // theme: ThemeData(
+      //   // Define the default brightness and colors.
+      //   brightness: Brightness.light,
+      //   primarySwatch: Colors.teal,
+      //   scaffoldBackgroundColor: Color.fromRGBO(235, 240, 242, 100),
+      //
+      //   // Define the default font family.
+      //   fontFamily: 'Georgia',
+      //
+      //   // Define the default `TextTheme`. Use this to specify the default
+      //   // text styling for headlines, titles, bodies of text, and more.
+      //   textTheme: const TextTheme(
+      //     headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold,
+      //         color: Colors.teal),
+      //     headline2: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,
+      //         color: Color.fromRGBO(16, 130, 88, 100)),
+      //     bodyText2: TextStyle(fontSize: 15.0),
+      //   ),
+      // ),
+      // home: new MyCard(),
+    // );
   }
 }
 
 class MyCard extends StatelessWidget{
-  const MyCard({Key? key}) : super(key: key);
+  const MyCard({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
@@ -74,6 +75,7 @@ class MyCard extends StatelessWidget{
       body: const MyCostumCard(),
     );
   }
+  final String title;
 }
 
 class MyCostumCard extends StatefulWidget{
