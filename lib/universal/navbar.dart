@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
 import 'package:tugas_akhir_f03/main.dart';
+import 'package:tugas_akhir_f03/scheduler.dart';
 
 // void main() {
 //   runApp(MaterialApp(
@@ -76,7 +77,18 @@ class _MyNavState extends State<NavApp> {
       NavBarItem(
         text: 'Scheduler',
         isLogin: false,
-        onTap: (String text) {},
+        onTap: (String text) {
+          Widget next = const Scheduler();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
       NavBarItem(
         text: 'Login',
