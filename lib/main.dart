@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_akhir_f03/forum_pandemi/forum_pandemi.dart';
+import 'package:tugas_akhir_f03/info_pendidikan.dart';
 import 'package:tugas_akhir_f03/susunJadwal.dart';
+import 'package:tugas_akhir_f03/to_do_list.dart';
 import 'package:tugas_akhir_f03/universal/navbar.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
 
@@ -231,7 +233,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => InfoPendidikan()),
+                  );
+                },
                 child: const Text(
                   'Recent Education',
                   style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 15),
@@ -270,7 +277,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ToDoListPage()),
+                  );
+                },
                 child: const Text(
                   'To-Do List',
                   style: TextStyle(color: Color(0xFF000000), fontSize: 15),
