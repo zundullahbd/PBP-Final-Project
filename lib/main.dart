@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tugas_akhir_f03/forum_pandemi/forum_pandemi.dart';
+import 'package:tugas_akhir_f03/susunJadwal.dart';
 import 'package:tugas_akhir_f03/universal/navbar.dart';
+import 'package:tugas_akhir_f03/covid_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'P.B.P',
       theme: ThemeData(
+        fontFamily: 'Poppins',
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -82,24 +86,321 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Column(
+        body: SingleChildScrollView(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           NavApp(
             currContext: context,
           ),
           Text(
-            'Pandemic Based Productivity',
+            'Corona, apa itu?',
             style: GoogleFonts.poppins(
               textStyle: Theme.of(context).textTheme.bodyText2,
             ),
           ),
           Text(
+            "Corona merupakan virus yang menyebabkan penyakit pada manusia dan hewan. Biasanya menyebabkan penyakit infeksi saluran pernapasan pada manusia, mulai flu biasa hingga penyakit yang serius seperti MERS (Middle East Respiratory Syndrome) dan SARS (Severe Acute Respiratory Syndrome).",
+            style: GoogleFonts.poppins(
+              textStyle: Theme.of(context).textTheme.headline6,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          Text(
             'Menu: ',
             style: Theme.of(context).textTheme.headline4,
           ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25)),
+                  // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.teal.shade200.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(
+                        color: Colors.teal,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForumPandemi()),
+                  );
+                },
+                child: const Text(
+                  'Forum Pandemi',
+                  style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 15),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25)),
+                  // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal.shade100),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal.shade100.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.teal.shade200.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(
+                        color: Colors.teal.shade100,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CovidData()),
+                  );
+                },
+                child: const Text(
+                  'Covid-19 Data',
+                  style: TextStyle(color: Color(0xFF000000), fontSize: 15),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25)),
+                  // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.teal.shade200.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(
+                        color: Colors.teal,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Text(
+                  'Recent Education',
+                  style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 15),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25)),
+                  // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal.shade100),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal.shade100.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.teal.shade200.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(
+                        color: Colors.teal.shade100,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Text(
+                  'To-Do List',
+                  style: TextStyle(color: Color(0xFF000000), fontSize: 15),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25)),
+                  // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.teal.shade200.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(
+                        color: Colors.teal,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {},
+                child: const Text(
+                  'Pandemic Quiz',
+                  style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 15),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25)),
+                  // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.teal.shade100),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal.shade100.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.teal.shade200.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(
+                        color: Colors.teal.shade100,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                },
+                child: const Text(
+                  'Scheduler',
+                  style: TextStyle(color: Color(0xFF000000), fontSize: 15),
+                )),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: ElevatedButton(
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(const EdgeInsets.only(
+                      top: 10, bottom: 10, left: 25, right: 25)),
+                  // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(Colors.teal),
+                  foregroundColor:
+                  MaterialStateProperty.all<Color>(Colors.white),
+                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return Colors.teal.withOpacity(0.04);
+                      }
+                      if (states.contains(MaterialState.focused) ||
+                          states.contains(MaterialState.pressed)) {
+                        return Colors.teal.shade200.withOpacity(0.12);
+                      }
+                      return null; // Defer to the widget's default.
+                    },
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(
+                        color: Colors.teal,
+                        width: 2.0,
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SusunJadwal()),
+                  );
+                },
+                child: const Text(
+                  'Susun Jadwal',
+                  style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 15),
+                )),
+          ),
         ],
       ),
-    );
+    ));
   }
 }
