@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tugas_akhir_f03/forum_pandemi/forum_pandemi.dart';
 import 'package:tugas_akhir_f03/universal/navbar.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
 
@@ -141,7 +142,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForumPandemi()),
+                  );
+                },
                 child: const Text(
                   'Forum Pandemi',
                   style: TextStyle(color: Color(0xFFFFFFFF), fontSize: 15),

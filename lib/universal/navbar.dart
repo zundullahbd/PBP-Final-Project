@@ -59,11 +59,6 @@ class _MyNavState extends State<NavApp> {
         onTap: (String text) {},
       ),
       NavBarItem(
-        text: 'Pandemic Forum',
-        isLogin: false,
-        onTap: (String text) {},
-      ),
-      NavBarItem(
         text: 'QuizOfPandemic',
         isLogin: false,
         onTap: (String text) {},

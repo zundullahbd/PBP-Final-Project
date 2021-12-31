@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_akhir_f03/universal/navbar.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(const ForumPandemi());
@@ -136,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ElevatedButton(
                         child: new Text('Add Info Pandemi'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.cyanAccent.shade700, //background color of button
+                          primary: Colors.teal, //background color of button
                           side: BorderSide(width:0.5, color:Colors.black),
                           elevation: 3, //elevation of button
                           shape: RoundedRectangleBorder( //to set border radius to button
@@ -162,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ElevatedButton(
                         child: new Text('Add Tips Kesehatan'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.cyanAccent.shade700, //background color of button
+                          primary: Colors.teal, //background color of button
                           side: BorderSide(width:0.5, color:Colors.black),
                           elevation: 3, //elevation of button
                           shape: RoundedRectangleBorder( //to set border radius to button
@@ -188,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ElevatedButton(
                         child: new Text('Add Curahan Hati'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.cyanAccent.shade700, //background color of button
+                          primary: Colors.teal, //background color of button
                           side: BorderSide(width:0.5, color:Colors.black),
                           elevation: 3, //elevation of button
                           shape: RoundedRectangleBorder( //to set border radius to button
@@ -249,6 +250,29 @@ class MyCustomForm3 extends StatefulWidget {
 
 class MyCustomFormState1 extends State<MyCustomForm1> {
   final _formKey = GlobalKey<FormState>();
+  String nama = '';
+  String pekerjaan = '';
+  String konten = '';
+
+  Future<void> addDataIP() async {
+    const url =
+        'http://127.0.0.1:8000/add-forum/add_data_info_pandemi';
+    try {
+      final response = await http.post(Uri.parse(url),
+          body: jsonEncode({
+            'nama': nama,
+            'pekerjaan': pekerjaan,
+            'konten' : konten,
+          }));
+      print(jsonDecode(response.body));
+      Map<String, dynamic> data = jsonDecode(response.body);
+
+      print(data['message']);
+
+    } catch (p) {
+      print(p);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -286,6 +310,9 @@ class MyCustomFormState1 extends State<MyCustomForm1> {
               }
               return null;
             },
+            onChanged: (value){
+              nama = value;
+            }
           ),
         Text('Pekerjaan'),
           TextFormField(
@@ -295,6 +322,9 @@ class MyCustomFormState1 extends State<MyCustomForm1> {
               }
               return null;
             },
+            onChanged: (value){
+              pekerjaan = value;
+            }
           ),
         Text('Konten'),
           TextFormField(
@@ -304,6 +334,9 @@ class MyCustomFormState1 extends State<MyCustomForm1> {
               }
               return null;
             },
+            onChanged: (value){
+              konten = value;
+            }
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -313,6 +346,10 @@ class MyCustomFormState1 extends State<MyCustomForm1> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Processing Data')),
                   );
+                  addDataIP();
+                  print(nama);
+                  print(pekerjaan);
+                  print(konten);
                 }
               },
               child: const Text('Submit'),
@@ -336,6 +373,28 @@ class MyCustomFormState1 extends State<MyCustomForm1> {
 
 class MyCustomFormState2 extends State<MyCustomForm2> {
   final _formKey = GlobalKey<FormState>();
+  String nama = '';
+  String pekerjaan = '';
+  String konten = '';
+
+  Future<void> addDataTK() async {
+    const url =
+        'http://127.0.0.1:8000/add-forum/add_data_tips_kesehatan';
+    try {
+      final response = await http.post(Uri.parse(url),
+          body: jsonEncode({
+            'nama': nama,
+            'pekerjaan': pekerjaan,
+            'konten' : konten,
+          }));
+      Map<String, dynamic> data = jsonDecode(response.body);
+
+      print(data['message']);
+
+    } catch (p) {
+      print(p);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -373,6 +432,9 @@ class MyCustomFormState2 extends State<MyCustomForm2> {
               }
               return null;
             },
+            onChanged: (value){
+              nama = value;
+            }
           ),
         Text('Pekerjaan'),
           TextFormField(
@@ -382,6 +444,9 @@ class MyCustomFormState2 extends State<MyCustomForm2> {
               }
               return null;
             },
+            onChanged: (value){
+              pekerjaan = value;
+            }
           ),
         Text('Konten'),
           TextFormField(
@@ -391,6 +456,9 @@ class MyCustomFormState2 extends State<MyCustomForm2> {
               }
               return null;
             },
+            onChanged: (value){
+              konten = value;
+            }
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -400,6 +468,10 @@ class MyCustomFormState2 extends State<MyCustomForm2> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Processing Data')),
                   );
+                  addDataTK();
+                  print(nama);
+                  print(pekerjaan);
+                  print(konten);
                 }
               },
               child: const Text('Submit'),
@@ -423,6 +495,28 @@ class MyCustomFormState2 extends State<MyCustomForm2> {
 
 class MyCustomFormState3 extends State<MyCustomForm3> {
   final _formKey = GlobalKey<FormState>();
+  String nama = '';
+  String pekerjaan = '';
+  String konten = '';
+
+  Future<void> addDataCH() async {
+    const url =
+        'http://127.0.0.1:8000/add-forum/add_data_curahan_hati';
+    try {
+      final response = await http.post(Uri.parse(url),
+          body: jsonEncode({
+            'nama': nama,
+            'pekerjaan': pekerjaan,
+            'konten' : konten,
+          }));
+      Map<String, dynamic> data = jsonDecode(response.body);
+
+      print(data['message']);
+
+    } catch (p) {
+      print(p);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -460,6 +554,9 @@ class MyCustomFormState3 extends State<MyCustomForm3> {
               }
               return null;
             },
+            onChanged: (value){
+              nama = value;
+            }
           ),
         Text('Pekerjaan'),
           TextFormField(
@@ -469,6 +566,9 @@ class MyCustomFormState3 extends State<MyCustomForm3> {
               }
               return null;
             },
+            onChanged: (value){
+              pekerjaan = value;
+            }
           ),
         Text('Konten'),
           TextFormField(
@@ -478,6 +578,9 @@ class MyCustomFormState3 extends State<MyCustomForm3> {
               }
               return null;
             },
+            onChanged: (value){
+              konten = value;
+            }
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -487,6 +590,10 @@ class MyCustomFormState3 extends State<MyCustomForm3> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Processing Data')),
                   );
+                  addDataCH();
+                  print(nama);
+                  print(pekerjaan);
+                  print(konten);
                 }
               },
               child: const Text('Submit'),
