@@ -12,9 +12,9 @@ TextEditingController controllerPukulMulai = new TextEditingController();
 TextEditingController controllerPukulSelesai = new TextEditingController();
 
 // liatlah console itu :)
-void main() => runApp(UDDApp());
+void main() => runApp(SusunJadwal());
 
-class UDDApp extends StatelessWidget {
+class SusunJadwal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

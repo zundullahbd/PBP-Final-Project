@@ -2,7 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
+import 'package:tugas_akhir_f03/forum_pandemi/forum_pandemi.dart';
 import 'package:tugas_akhir_f03/main.dart';
+import 'package:tugas_akhir_f03/quiz_app.dart';
+import 'package:tugas_akhir_f03/login.dart';
 import 'package:tugas_akhir_f03/susunJadwal.dart';
 
 // void main() {
@@ -47,7 +50,7 @@ class _MyNavState extends State<NavApp> {
         text: 'SusunJadwal',
         isLogin: false,
         onTap: (String text) {
-          Widget next = UDDApp();
+          Widget next = SusunJadwal();
           setState(() {
             collapsableHeight = 0.0;
           });
@@ -60,14 +63,35 @@ class _MyNavState extends State<NavApp> {
         },
       ),
       NavBarItem(
-        text: 'Search',
+        text: 'To-Do List',
         isLogin: false,
         onTap: (String text) {},
       ),
       NavBarItem(
-        text: 'To-Do List',
+        text: 'Recently on Education',
         isLogin: false,
         onTap: (String text) {},
+      ),
+      NavBarItem(
+        text: 'QuizOfPandemic',
+        isLogin: false,
+        onTap: (String text) {},
+      ),
+      NavBarItem(
+        text: 'Forum Pandemi',
+        isLogin: false,
+        onTap: (String text) {
+          Widget next = const ForumPandemi();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
       NavBarItem(
         text: 'Covid-19 Data',
@@ -79,7 +103,7 @@ class _MyNavState extends State<NavApp> {
           });
           if (widget.current != text) {
             Navigator.push(
-              context,
+              widget.currContext,
               MaterialPageRoute(builder: (context) => next),
             );
           }
@@ -91,9 +115,36 @@ class _MyNavState extends State<NavApp> {
         onTap: (String text) {},
       ),
       NavBarItem(
+        text: 'Quiz of Pandemic',
+        isLogin: false,
+        onTap: (String text) {
+          Widget next = const QuizApp();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
+      ),
+      NavBarItem(
         text: 'Login',
         isLogin: true,
-        onTap: (String text) {},
+        onTap: (String text) {
+          Widget next = const Login();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
     ];
     totalNavItems = navBarItems.length;
@@ -208,23 +259,23 @@ class _NavBarItemState extends State<NavBarItem> {
             margin: const EdgeInsets.symmetric(horizontal: 24.0),
             child: widget.isLogin == false
                 ? Text(
-                    // not login
-                    widget.text,
-                    style: GoogleFonts.poppins(
-                        color: Colors.black54,
-                        fontSize: 16,
-                        letterSpacing: 0.9),
-                  )
+              // not login
+              widget.text,
+              style: GoogleFonts.poppins(
+                  color: Colors.black54,
+                  fontSize: 16,
+                  letterSpacing: 0.9),
+            )
                 : Text(
-                    // login
-                    widget.text,
-                    style: GoogleFonts.poppins(
-                      color: Colors.white,
-                      fontSize: 16,
-                      letterSpacing: 0.9,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+              // login
+              widget.text,
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 16,
+                letterSpacing: 0.9,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ),
         ),
       ),
