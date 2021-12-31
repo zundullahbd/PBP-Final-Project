@@ -1,13 +1,9 @@
 // Code adapted from : https://amiworthy.in/html/Bootstrap_NavBar.html
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tugas_akhir_f03/App1.dart';
-import 'package:tugas_akhir_f03/app1_susun_jadwal.dart';
-import 'package:tugas_akhir_f03/app1_susunjadwal.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
 import 'package:tugas_akhir_f03/main.dart';
 import 'package:tugas_akhir_f03/susunJadwal.dart';
-import 'package:tugas_akhir_f03/susun_jadwal.dart';
 
 // void main() {
 //   runApp(MaterialApp(
