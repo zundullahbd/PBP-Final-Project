@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: Theme.of(context).textTheme.headline4,
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: ElevatedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(const EdgeInsets.only(
@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: Colors.teal,
                         width: 2.0,
                       ),
@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: ElevatedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(const EdgeInsets.only(
@@ -199,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: ElevatedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(const EdgeInsets.only(
@@ -224,7 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: Colors.teal,
                         width: 2.0,
                       ),
@@ -238,7 +238,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: ElevatedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(const EdgeInsets.only(
@@ -277,7 +277,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: ElevatedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(const EdgeInsets.only(
@@ -302,7 +302,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(
+                      side: const BorderSide(
                         color: Colors.teal,
                         width: 2.0,
                       ),
@@ -316,7 +316,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: ElevatedButton(
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(const EdgeInsets.only(
