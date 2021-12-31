@@ -126,7 +126,7 @@ class MyCostumFormState extends State<MyCostumForm> {
             new Text("Hari matkul diadakan: " + day),
             new Text("Pukul matkul dimulai: ${controllerPukulMulai.text}"),
             new Text("Pukul matkul selesai: ${controllerPukulSelesai.text}" + " " + end_time),
-            new RaisedButton(
+            new ElevatedButton(
               child: new Text("Close"),
               onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
             ),
