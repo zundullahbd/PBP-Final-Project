@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
+import 'package:tugas_akhir_f03/forum_pandemi/forum_pandemi.dart';
 import 'package:tugas_akhir_f03/main.dart';
 
 // void main() {
@@ -56,6 +57,22 @@ class _MyNavState extends State<NavApp> {
         text: 'To-Do List',
         isLogin: false,
         onTap: (String text) {},
+      ),
+      NavBarItem(
+        text: 'Forum Pandemi',
+        isLogin: false,
+        onTap: (String text) {
+          Widget next = const ForumPandemi();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
       NavBarItem(
         text: 'Covid-19 Data',
