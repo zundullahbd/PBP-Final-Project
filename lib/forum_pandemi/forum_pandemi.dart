@@ -256,7 +256,7 @@ class MyCustomFormState1 extends State<MyCustomForm1> {
 
   Future<void> addDataIP() async {
     const url =
-        'http://127.0.0.1:8000/add-forum/add_data_info_pandemi';
+        'https://pbp-midtermproject-f03.herokuapp.com/add-forum/add_data_info_pandemi';
     try {
       final response = await http.post(Uri.parse(url),
           body: jsonEncode({
@@ -379,7 +379,7 @@ class MyCustomFormState2 extends State<MyCustomForm2> {
 
   Future<void> addDataTK() async {
     const url =
-        'http://127.0.0.1:8000/add-forum/add_data_tips_kesehatan';
+        'https://pbp-midtermproject-f03.herokuapp.com/add-forum/add_data_tips_kesehatan';
     try {
       final response = await http.post(Uri.parse(url),
           body: jsonEncode({
@@ -501,7 +501,7 @@ class MyCustomFormState3 extends State<MyCustomForm3> {
 
   Future<void> addDataCH() async {
     const url =
-        'http://127.0.0.1:8000/add-forum/add_data_curahan_hati';
+        'https://pbp-midtermproject-f03.herokuapp.com/add-forum/add_data_curahan_hati';
     try {
       final response = await http.post(Uri.parse(url),
           body: jsonEncode({
