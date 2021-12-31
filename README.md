@@ -12,6 +12,8 @@
 ## Link Download Apk :
 https://drive.google.com/file/d/1KYQf-Mc8bsSsY7g7RB26QpCD0jSsK-P7/view?usp=sharing
 
+https://drive.google.com/drive/folders/1aI0UXic0k3U5bEdiYpm0pmbqd4yTkjxE?usp=sharing (new)
+
 ## Cerita singkat aplikasi :
 **Pandemic Based Productivity (PBP)**<br>
 Website ini dibuat untuk membantu pengguna menghadapi budaya-budaya baru saat pandemi seperti PJJ, WFJ, SFH, dan Prokes. Di dalam website ini terdapat fitur berita terkini terkait pandemi seperti tingkat kesembuhan, perkembangan vaksin, dan aturan baru. Untuk mendukung pengguna saling bertukar informasi, kami juga menyiapkan halaman khusus berupa forum yang dapat diposting oleh pengguna. Terdapat quiz interaktif seputar protokol kesehatan dalam masa pandemi untuk mendukung pengguna menerapkan protokol kesehatan.
