@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
 import 'package:tugas_akhir_f03/main.dart';
+import 'package:tugas_akhir_f03/quiz_app.dart';
+import 'package:tugas_akhir_f03/login.dart';
 
 // void main() {
 //   runApp(MaterialApp(
@@ -89,9 +91,36 @@ class _MyNavState extends State<NavApp> {
         onTap: (String text) {},
       ),
       NavBarItem(
+        text: 'Quiz of Pandemic',
+        isLogin: false,
+        onTap: (String text) {
+          Widget next = const QuizApp();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
+      ),
+      NavBarItem(
         text: 'Login',
         isLogin: true,
-        onTap: (String text) {},
+        onTap: (String text) {
+          Widget next = const Login();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
     ];
     totalNavItems = navBarItems.length;
