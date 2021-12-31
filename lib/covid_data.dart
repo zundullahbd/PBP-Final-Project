@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_akhir_f03/universal/navbar.dart';
+import 'package:tugas_akhir_f03/universal/globals.dart' as globals;
+import 'package:tugas_akhir_f03/covid_searcheddata.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(const CovidData());
@@ -14,32 +17,6 @@ class CovidData extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   title: 'Covid-19 Data',
-    //   theme: ThemeData(
-    //     // This is the theme of your application.
-    //     //
-    //     // Try running your application with "flutter run". You'll see the
-    //     // application has a blue toolbar. Then, without quitting the app, try
-    //     // changing the primarySwatch below to Colors.green and then invoke
-    //     // "hot reload" (press "r" in the console where you ran "flutter run",
-    //     // or simply save your changes to "hot reload" in a Flutter IDE).
-    //     // Notice that the counter didn't reset back to zero; the application
-    //     // is not restarted.
-    //     colorScheme: ColorScheme.fromSwatch(
-    //       primarySwatch: Colors.teal,
-    //     ).copyWith(
-    //       secondary: Colors.green,
-    //     ),
-    //     canvasColor: const Color(0xFFF0F8FF),
-    //     textTheme: const TextTheme(
-    //       bodyText2: TextStyle(color: Color(0xFF000000), fontSize: 30),
-    //       headline4: TextStyle(color: Color(0xFF800000), fontSize: 17),
-    //       headline6: TextStyle(color: Color(0xFF000000), fontSize: 15),
-    //     ),
-    //   ),
-    //   home: const MyHomePage(title: 'Covid-19 Data'),
-    // );
     return const MyHomePage(title: 'Covid-19 Data');
   }
 }
@@ -68,6 +45,75 @@ class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextStyle tableTitle =
       const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w300);
+  String userId = '';
+  late var searchedData;
+  bool shouldEnable = true;
+
+  // sumber : https://stackoverflow.com/questions/52824388/how-do-you-add-query-parameters-to-a-dart-http-request
+  Future<void> fetchData() async {
+    const url =
+        'http://pbp-midtermproject-f03.herokuapp.com/covid-data/data/json';
+    Uri uri = Uri.parse(url);
+    final finalUri = uri
+        .replace(queryParameters: {'search': dropdownValue, 'user_id': userId});
+    final response = await http.get(finalUri);
+    if (response.statusCode == 200) {
+      var extractedData = jsonDecode(response.body);
+      print(jsonDecode(response.body));
+      searchedData = extractedData['searchedData'];
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchedData(
+                  data: searchedData,
+                  length: searchedData.length,
+                )),
+      );
+      setState(() {
+        shouldEnable = true;
+      });
+    } else {
+      print('unexpected error');
+    }
+  }
+
+  Widget loggedInView() {
+    if (globals.isLoggedIn) {
+      return ListView.builder(
+        itemBuilder: (context, index) {
+          return Card(
+              child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Provinsi: " + _datacards[index].provinsi,
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold)),
+                      const Divider(
+                        height: 10,
+                        thickness: 1,
+                        indent: 0,
+                        endIndent: 10,
+                        color: Colors.grey,
+                      ),
+                      Text("Positif: " + _datacards[index].positif.toString()),
+                      Text("Sembuh: " + _datacards[index].sembuh.toString()),
+                      Text("Meninggal: " +
+                          _datacards[index].meninggal.toString()),
+                    ],
+                  )));
+        },
+        itemCount: _datacards.length,
+      );
+    } else {
+      return const Padding(
+        padding: EdgeInsets.only(top: 0),
+      );
+    }
+  }
+
+  List<DataCard> _datacards = [];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -78,161 +124,155 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
         body: Form(
-      key: _formKey,
-      child: ListView(
-        // Column is also a layout widget. It takes a list of children and
-        // arranges them vertically. By default, it sizes itself to fit its
-        // children horizontally, and tries to be as tall as its parent.
-        //
-        // Invoke "debug painting" (press "p" in the console, choose the
-        // "Toggle Debug Paint" action from the Flutter Inspector in Android
-        // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-        // to see the wireframe for each widget.
-        //
-        // Column has various properties to control how it sizes itself and
-        // how it positions its children. Here we use mainAxisAlignment to
-        // center the children vertically; the main axis here is the vertical
-        // axis because Columns are vertical (the cross axis would be
-        // horizontal).
-        //mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          NavApp(
-            current: "Covid-19 Data",
-            currContext: context,
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: Text(
-              'Data Sebaran Covid-19 di Indonesia',
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Padding(
-            padding: top,
-            child: Text(
-              'Data provided by data.covid19.go.id API',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ),
-          Text(
-            'Provinsi :',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          DropdownButtonFormField<String>(
-            value: dropdownValue,
-            isDense: true,
-            icon: const Icon(Icons.arrow_drop_down_sharp),
-            iconSize: 24,
-            elevation: 16,
-            style: const TextStyle(color: Colors.black, fontSize: 15),
-            // underline: Container(
-            //   height: 1,
-            //   color: Colors.teal,
-            // ),
-            validator: (String? value) {
-              if (value == 'PILIH PROVINSI') {
-                return 'Pilih provinsi yang diinginkan';
-              }
-              return null;
-            },
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
-            },
-            items: <String>[
-              'PILIH PROVINSI',
-              'DKI JAKARTA',
-              'JAWA BARAT',
-              'JAWA TENGAH',
-              'JAWA TIMUR',
-              'KALIMANTAN TIMUR',
-              'DAERAH ISTIMEWA YOGYAKARTA',
-              'BANTEN',
-              'RIAU',
-              'BALI',
-              'SULAWESI SELATAN',
-              'SUMATERA UTARA',
-              'SUMATERA BARAT',
-              'KALIMANTAN SELATAN',
-              'NUSA TENGGARA TIMUR',
-              'SUMATERA SELATAN',
-              'KEPULAUAN RIAU',
-              'KEPULAUAN BANGKA BELITUNG',
-              'LAMPUNG',
-              'SULAWESI TENGAH',
-              'KALIMANTAN TENGAH',
-              'KALIMANTAN BARAT',
-              'ACEH',
-              'KALIMANTAN UTARA',
-              'SULAWESI UTARA',
-              'PAPUA',
-              'JAMBI',
-              'NUSA TENGGARA BARAT',
-              'PAPUA BARAT',
-              'BENGKULU',
-              'SULAWESI TENGGARA',
-              'MALUKU',
-              'SULAWESI BARAT',
-              'MALUKU UTARA',
-              'GORONTALO',
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-          ElevatedButton(
-              style: ButtonStyle(
-                // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                  (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.hovered)) {
-                      return Colors.green.withOpacity(0.04);
-                    }
-                    if (states.contains(MaterialState.focused) ||
-                        states.contains(MaterialState.pressed)) {
-                      return Colors.green.withOpacity(0.12);
-                    }
-                    return null; // Defer to the widget's default.
-                  },
+            key: _formKey,
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                Column(
+                  children: [
+                    NavApp(
+                      current: "Covid-19 Data",
+                      currContext: context,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        'Data Sebaran Covid-19 di Indonesia',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Padding(
+                      padding: top,
+                      child: Text(
+                        'Data provided by data.covid19.go.id API',
+                        style: Theme.of(context).textTheme.headline4,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Text(
+                      'Provinsi :',
+                      style: Theme.of(context).textTheme.headline6,
+                      textAlign: TextAlign.center,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: DropdownButtonFormField<String>(
+                        value: dropdownValue,
+                        isDense: true,
+                        icon: const Icon(Icons.arrow_drop_down_sharp),
+                        iconSize: 24,
+                        elevation: 16,
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 15),
+                        // underline: Container(
+                        //   height: 1,
+                        //   color: Colors.teal,
+                        // ),
+                        validator: (String? value) {
+                          if (value == 'PILIH PROVINSI') {
+                            return 'Pilih provinsi yang diinginkan';
+                          }
+                          return null;
+                        },
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                          });
+                        },
+                        items: <String>[
+                          'PILIH PROVINSI',
+                          'DKI JAKARTA',
+                          'JAWA BARAT',
+                          'JAWA TENGAH',
+                          'JAWA TIMUR',
+                          'KALIMANTAN TIMUR',
+                          'DAERAH ISTIMEWA YOGYAKARTA',
+                          'BANTEN',
+                          'RIAU',
+                          'BALI',
+                          'SULAWESI SELATAN',
+                          'SUMATERA UTARA',
+                          'SUMATERA BARAT',
+                          'KALIMANTAN SELATAN',
+                          'NUSA TENGGARA TIMUR',
+                          'SUMATERA SELATAN',
+                          'KEPULAUAN RIAU',
+                          'KEPULAUAN BANGKA BELITUNG',
+                          'LAMPUNG',
+                          'SULAWESI TENGAH',
+                          'KALIMANTAN TENGAH',
+                          'KALIMANTAN BARAT',
+                          'ACEH',
+                          'KALIMANTAN UTARA',
+                          'SULAWESI UTARA',
+                          'PAPUA',
+                          'JAMBI',
+                          'NUSA TENGGARA BARAT',
+                          'PAPUA BARAT',
+                          'BENGKULU',
+                          'SULAWESI TENGGARA',
+                          'MALUKU',
+                          'SULAWESI BARAT',
+                          'MALUKU UTARA',
+                          'GORONTALO',
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    ElevatedButton(
+                        style: ButtonStyle(
+                          // maximumSize: MaterialStateProperty.all<Size>(Size.fromWidth(5)),
+                          backgroundColor: shouldEnable
+                              ? MaterialStateProperty.all<Color>(Colors.green)
+                              : MaterialStateProperty.all<Color>(
+                                  Colors.grey.shade200),
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          overlayColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                            (Set<MaterialState> states) {
+                              if (states.contains(MaterialState.hovered)) {
+                                return Colors.green.withOpacity(0.04);
+                              }
+                              if (states.contains(MaterialState.focused) ||
+                                  states.contains(MaterialState.pressed)) {
+                                return Colors.green.withOpacity(0.12);
+                              }
+                              return null; // Defer to the widget's default.
+                            },
+                          ),
+                        ),
+                        onPressed: shouldEnable
+                            ? () {
+                                if (_formKey.currentState!.validate()) {
+                                  print('test2');
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          duration: Duration(seconds: 2),
+                                          content: Text("Please wait...")));
+                                  setState(() {
+                                    shouldEnable = false;
+                                  });
+                                  fetchData();
+                                }
+                              }
+                            : null,
+                        child: const Text(
+                          'Submit',
+                          style:
+                              TextStyle(color: Color(0xFFFFFFFF), fontSize: 15),
+                        )),
+                    loggedInView(),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                    ),
+                  ],
                 ),
-              ),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text(dropdownValue)));
-                }
-              },
-              child: const Text('Submit')),
-          Column(children: <Widget>[
-            Container(
-              margin: top,
-              child: Table(
-                //defaultColumnWidth: const FixedColumnWidth(120.0),
-                border: TableBorder.all(
-                    color: Colors.black, style: BorderStyle.solid, width: 1),
-                children: [
-                  TableRow(children: [
-                    Column(children: [Text('Provinsi', style: tableTitle)]),
-                    Column(
-                        children: [Text('Dalam Perawatan', style: tableTitle)]),
-                    Column(children: [Text('Kasus Sembuh', style: tableTitle)]),
-                    Column(
-                        children: [Text('Kasus Meninggal', style: tableTitle)]),
-                  ]),
-                ],
-              ),
-            ),
-          ]),
-          const Padding(
-            padding: EdgeInsets.only(top: 20.0),
-          ),
-        ],
-      ),
-    ));
+              ],
+            )));
   }
 }
