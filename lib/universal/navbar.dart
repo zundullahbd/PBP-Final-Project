@@ -48,12 +48,22 @@ class _MyNavState extends State<NavApp> {
         onTap: (String text) {},
       ),
       NavBarItem(
-        text: 'Search',
+        text: 'To-Do List',
         isLogin: false,
         onTap: (String text) {},
       ),
       NavBarItem(
-        text: 'To-Do List',
+        text: 'Recently on Education',
+        isLogin: false,
+        onTap: (String text) {},
+      ),
+      NavBarItem(
+        text: 'Pandemic Forum',
+        isLogin: false,
+        onTap: (String text) {},
+      ),
+      NavBarItem(
+        text: 'QuizOfPandemic',
         isLogin: false,
         onTap: (String text) {},
       ),
@@ -67,7 +77,7 @@ class _MyNavState extends State<NavApp> {
           });
           if (widget.current != text) {
             Navigator.push(
-              context,
+              widget.currContext,
               MaterialPageRoute(builder: (context) => next),
             );
           }
