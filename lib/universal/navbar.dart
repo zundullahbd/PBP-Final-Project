@@ -4,9 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tugas_akhir_f03/covid_data.dart';
 import 'package:tugas_akhir_f03/forum_pandemi/forum_pandemi.dart';
 import 'package:tugas_akhir_f03/main.dart';
+<<<<<<< HEAD
+import 'package:tugas_akhir_f03/scheduler.dart';
+=======
 import 'package:tugas_akhir_f03/quiz_app.dart';
 import 'package:tugas_akhir_f03/login.dart';
 import 'package:tugas_akhir_f03/susunJadwal.dart';
+import 'package:tugas_akhir_f03/info_pendidikan.dart';
+import 'package:tugas_akhir_f03/to_do_list.dart';
+>>>>>>> 90cb4dd62237df984ec7c2618d45fc197eb2cbc0
 
 // void main() {
 //   runApp(MaterialApp(
@@ -65,12 +71,34 @@ class _MyNavState extends State<NavApp> {
       NavBarItem(
         text: 'To-Do List',
         isLogin: false,
-        onTap: (String text) {},
+        onTap: (String text) {
+          Widget next = ToDoListPage();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
       NavBarItem(
         text: 'Recently on Education',
         isLogin: false,
-        onTap: (String text) {},
+        onTap: (String text) {
+          Widget next = InfoPendidikan();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
       NavBarItem(
         text: 'QuizOfPandemic',
@@ -112,7 +140,18 @@ class _MyNavState extends State<NavApp> {
       NavBarItem(
         text: 'Scheduler',
         isLogin: false,
-        onTap: (String text) {},
+        onTap: (String text) {
+          Widget next = const Scheduler();
+          setState(() {
+            collapsableHeight = 0.0;
+          });
+          if (widget.current != text) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => next),
+            );
+          }
+        },
       ),
       NavBarItem(
         text: 'Quiz of Pandemic',
